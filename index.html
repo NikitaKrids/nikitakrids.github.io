@@ -1,16 +1,215 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>NikitaKrids Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Future Site | Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .calculator-btn {
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .calculator-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .calculator-btn:active {
+            transform: translateY(0);
+        }
+        #display {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            letter-spacing: 1px;
+        }
+        .glow {
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+            to {
+                box-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+            }
+        }
+    </style>
 </head>
-<body>
-  <h1>Привет, это мой временый JS-проект!</h1>
-  <p id="demo">Нажми кнопку:</p>
-  <button onclick="myFunction()">Кликни!</button>
-  <script>
-    function myFunction() {
-      document.getElementById("demo").innerHTML = "Работает!";
-    }
-  </script>
+<body class="bg-gray-100 min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="max-w-2xl w-full bg-white rounded-xl shadow-xl overflow-hidden mb-8">
+        <div class="bg-blue-600 text-white p-6 text-center">
+            <h1 class="text-3xl font-bold mb-2">Welcome to My Future Site!</h1>
+            <p class="text-blue-100">This will be my site, but I will upload content to it later. Since you need to have "reasonable content" I will make a calculator here.</p>
+        </div>
+        
+        <div class="p-6">
+            <div class="flex justify-center mb-8">
+                <div class="w-full max-w-xs">
+                    <div class="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+                        <!-- Calculator Display -->
+                        <div id="display" class="bg-gray-900 text-white p-4 text-right text-3xl font-mono h-16 overflow-x-auto">
+                            0
+                        </div>
+                        
+                        <!-- Calculator Buttons -->
+                        <div class="grid grid-cols-4 gap-1 p-2 bg-gray-700">
+                            <!-- Row 1 -->
+                            <button onclick="clearDisplay()" class="calculator-btn bg-red-500 hover:bg-red-600 text-white font-bold py-4 rounded col-span-2">
+                                AC
+                            </button>
+                            <button onclick="backspace()" class="calculator-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-4 rounded">
+                                <i class="fas fa-backspace"></i>
+                            </button>
+                            <button onclick="appendToDisplay('/')" class="calculator-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded">
+                                ÷
+                            </button>
+                            
+                            <!-- Row 2 -->
+                            <button onclick="appendToDisplay('7')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                7
+                            </button>
+                            <button onclick="appendToDisplay('8')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                8
+                            </button>
+                            <button onclick="appendToDisplay('9')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                9
+                            </button>
+                            <button onclick="appendToDisplay('*')" class="calculator-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded">
+                                ×
+                            </button>
+                            
+                            <!-- Row 3 -->
+                            <button onclick="appendToDisplay('4')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                4
+                            </button>
+                            <button onclick="appendToDisplay('5')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                5
+                            </button>
+                            <button onclick="appendToDisplay('6')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                6
+                            </button>
+                            <button onclick="appendToDisplay('-')" class="calculator-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded">
+                                -
+                            </button>
+                            
+                            <!-- Row 4 -->
+                            <button onclick="appendToDisplay('1')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                1
+                            </button>
+                            <button onclick="appendToDisplay('2')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                2
+                            </button>
+                            <button onclick="appendToDisplay('3')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                3
+                            </button>
+                            <button onclick="appendToDisplay('+')" class="calculator-btn bg-blue-500 hover:bg-blue-600 text-white font-bold py-4 rounded">
+                                +
+                            </button>
+                            
+                            <!-- Row 5 -->
+                            <button onclick="appendToDisplay('0')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded col-span-2">
+                                0
+                            </button>
+                            <button onclick="appendToDisplay('.')" class="calculator-btn bg-gray-200 hover:bg-gray-300 font-bold py-4 rounded">
+                                .
+                            </button>
+                            <button onclick="calculate()" class="calculator-btn bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded glow">
+                                =
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center text-gray-600">
+                <p class="mb-2">This is a temporary placeholder until I add my real content.</p>
+                <p class="text-sm">The calculator is fully functional - try it out!</p>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="text-center text-gray-500 text-sm mt-8">
+        <p>© 2023 My Future Site. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let currentDisplay = '0';
+        let resetDisplay = false;
+        
+        function updateDisplay() {
+            const display = document.getElementById('display');
+            display.textContent = currentDisplay;
+            
+            // Auto-scroll for long numbers
+            display.scrollLeft = display.scrollWidth;
+        }
+        
+        function appendToDisplay(value) {
+            if (currentDisplay === '0' || resetDisplay) {
+                currentDisplay = value;
+                resetDisplay = false;
+            } else {
+                currentDisplay += value;
+            }
+            updateDisplay();
+        }
+        
+        function clearDisplay() {
+            currentDisplay = '0';
+            updateDisplay();
+        }
+        
+        function backspace() {
+            if (currentDisplay.length === 1) {
+                currentDisplay = '0';
+            } else {
+                currentDisplay = currentDisplay.slice(0, -1);
+            }
+            updateDisplay();
+        }
+        
+        function calculate() {
+            try {
+                // Replace × with * and ÷ with / for evaluation
+                const expression = currentDisplay.replace(/×/g, '*').replace(/÷/g, '/');
+                currentDisplay = eval(expression).toString();
+                resetDisplay = true;
+                updateDisplay();
+                
+                // Add temporary glow effect to display
+                const display = document.getElementById('display');
+                display.classList.add('bg-blue-900');
+                setTimeout(() => {
+                    display.classList.remove('bg-blue-900');
+                }, 300);
+            } catch (error) {
+                currentDisplay = 'Error';
+                updateDisplay();
+                setTimeout(clearDisplay, 1500);
+            }
+        }
+        
+        // Keyboard support
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            
+            if (/[0-9]/.test(key)) {
+                appendToDisplay(key);
+            } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+                appendToDisplay(key);
+            } else if (key === '.') {
+                appendToDisplay('.');
+            } else if (key === 'Enter') {
+                calculate();
+            } else if (key === 'Escape') {
+                clearDisplay();
+            } else if (key === 'Backspace') {
+                backspace();
+            }
+        });
+        
+        // Initialize display
+        updateDisplay();
+    </script>
 </body>
 </html>
